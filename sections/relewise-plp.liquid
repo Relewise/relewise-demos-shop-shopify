@@ -1,0 +1,58 @@
+{% schema %}
+{
+  "name": "Relewise PLP",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Listing"
+    },
+    {
+      "type": "number",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Default",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<section id="relewise-plp">
+  <div class="container">
+    <h2>{{ section.settings.heading }}</h2>
+    <div class="product-list">
+      {% for product in collections.all.products limit: section.settings.products_per_page %}
+        <div class="product-item">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.price | money }}</p>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  #relewise-plp .product-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  #relewise-plp .product-item {
+    flex: 1 1 25%;
+    box-sizing: border-box;
+    padding: 10px;
+  }
+  #relewise-plp .product-item img {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
