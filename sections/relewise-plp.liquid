@@ -1,30 +1,28 @@
-<div class="{% if section.settings.include_margins %}page-width{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-  {%- for block in section.blocks -%}
-    {% render block %}
-  {%- endfor -%}
+<div class="custom-text-section">
+  <h2>{{ section.settings.custom_text_title }}</h2>
+  <div>{{ section.settings.custom_text_body }}</div>
 </div>
 
 {% schema %}
 {
   "name": "Relewise",
-  "tag": "section",
-  "class": "section",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "include_margins",
-      "default": true,
-      "label": "t:sections.apps.settings.include_margins.label"
-    }
-  ],
-  "blocks": [
+      "id": "custom_text_title",
+      "type": "text",
+      "label": "Text box heading",
+      "default": "Title"
+    },
     {
-      "type": "@app"
+      "id": "custom_text_body",
+      "type": "richtext",
+      "label": "Add custom text below",
+      "default": "<p>Add your text here</p>"
     }
   ],
   "presets": [
     {
-      "name": "t:sections.apps.presets.name"
+      "name": "custom-text"
     }
   ]
 }
