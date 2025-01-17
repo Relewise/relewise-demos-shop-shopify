@@ -8,6 +8,29 @@
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
+.relewise-products {
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+.relewise-products img {
+  width: 200px;
+  height: auto;
+}
+
+.relewise-products .relewise-card {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgb(12, 7, 165);
+  text-align: center;
+  background-color: #ffffff;
+  
+
+}
+
 .product-card-wrapper .card,
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);
