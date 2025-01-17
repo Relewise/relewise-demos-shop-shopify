@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import { ProductSearchBuilder, ProductSearchResponse, Searcher, UserFactory } from "@relewise/client";
 import Pagination from "./Pagination";
+import Facets from "./Facets";
+import getFacetsByType from "./assets/getFacetsByType";
 
 function App({ collectionId, currency, language }: { collectionId: string; currency: string, language: string }) {
   const [response, setResponse] = useState<ProductSearchResponse>();
-  
+  const [selectedFacets, setSelectedFacets] = useState<Record<string, string[]>>({
+    Category: [],
+    Brand: []
+  });
+
   const [page, setPage] = useState(1);
   const pageSize = 1;
 
@@ -26,6 +32,11 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
         .pagination((p) =>
           p.setPageSize(pageSize).setPage(page)
         )
+        .facets((f) =>
+          f
+            .addCategoryFacet("ImmediateParent", getFacetsByType(selectedFacets, "Category"))
+            .addBrandFacet(getFacetsByType(selectedFacets, "Brand"))
+        )
         .filters((f) => f.addProductCategoryIdFilter('ImmediateParent', collectionId));
 
       const searcher = new Searcher("213664f9-4d5c-413b-a523-7a9c79c30080", "n_RA9uC6Ar3TQt_", {
@@ -43,7 +54,7 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
     };
 
     fetchProducts();
-  }, [collectionId, currency, language, page]); // Empty dependency array ensures this runs only once on mount.
+  }, [collectionId, currency, language, page, selectedFacets]); // Empty dependency array ensures this runs only once on mount.
 
   return (
     <>
@@ -56,7 +67,12 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
           </div>
         ))}
       </div>
-      <Pagination currentPage={page} goToPage={(page) => setPage(page)} pageSize={pageSize} total={response?.hits ?? 0}/>
+      {response?.facets &&
+        <Facets selectedFacets={selectedFacets} setSelectedFacets={setSelectedFacets} facets={response?.facets}/>
+      }
+      {response?.hits &&
+        <Pagination currentPage={page} goToPage={(page) => setPage(page)} pageSize={pageSize} total={response.hits}/>
+      }
     </>
   );
 }
