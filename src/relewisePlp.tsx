@@ -9,11 +9,11 @@ if (element) {
   const currency = element.dataset.shopCurrency;
   const language = element.dataset.shopLanguage;
 
-  console.log(collectionId, currency, language)
-  collectionId && currency && language &&
     createRoot(element!).render(
       <StrictMode>
-        <App collectionId={collectionId} currency={currency} language={language} />
+        {collectionId && currency && language &&
+          <App collectionId={collectionId} currency={currency} language={language} />
+        }
       </StrictMode>,
     );
 }

@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
-import { ProductResult, ProductSearchBuilder, Searcher, UserFactory } from "@relewise/client";
+import { ProductSearchBuilder, ProductSearchResponse, Searcher, UserFactory } from "@relewise/client";
+import Pagination from "./Pagination";
 
 function App({ collectionId, currency, language }: { collectionId: string; currency: string, language: string }) {
-  const [products, setProducts] = useState<ProductResult[]>([]);
+  const [response, setResponse] = useState<ProductSearchResponse>();
+  
+  const [page, setPage] = useState(1);
+  const pageSize = 1;
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -17,10 +21,10 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
         .setSelectedProductProperties({
           displayName: true,
           allData: true,
-
+          pricing: true,
         })
         .pagination((p) =>
-          p.setPageSize(30).setPage(1)
+          p.setPageSize(pageSize).setPage(page)
         )
         .filters((f) => f.addProductCategoryIdFilter('ImmediateParent', collectionId));
 
@@ -31,8 +35,7 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
       try {
         const results = await searcher.searchProducts(builder.build());
         if (results?.results) {
-          setProducts(results.results);
-          console.log(results.results);
+          setResponse(results);
         }
       } catch (error) {
         console.error("Error fetching products:", error);
@@ -40,23 +43,20 @@ function App({ collectionId, currency, language }: { collectionId: string; curre
     };
 
     fetchProducts();
-  }, []); // Empty dependency array ensures this runs only once on mount.
+  }, [collectionId, currency, language, page]); // Empty dependency array ensures this runs only once on mount.
 
   return (
     <>
       <div className="relewise-products">
-        {products.map((item) => (
+        {response?.results?.map((item) => (
           <div className="relewise-card" key={item.productId}>
             <img src={item.data?.['relewise-demo-store.myshopify.com_ImageUrls']?.value.$values} alt="" />
-            <h4>Item ID:{item.productId}</h4>
-            <h5>{item.data?.Vendor.value}</h5>
+            <h5>{item.salesPrice}</h5>
             <h5>{item.data?.['relewise-demo-store.myshopify.com_ShopifyHandle'].value}</h5>
-            
-          
           </div>
-
         ))}
       </div>
+      <Pagination currentPage={page} goToPage={(page) => setPage(page)} pageSize={pageSize} total={response?.hits ?? 0}/>
     </>
   );
 }
