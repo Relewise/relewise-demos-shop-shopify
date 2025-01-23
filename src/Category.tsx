@@ -52,6 +52,8 @@ function Category({ collectionId, currency, language }: { collectionId: string; 
     } else {
       setSelectedFacets([...selectedFacets, value]);
     }
+
+    setPage(1);
   }
 
   function getProductData(product: ProductResult, key: string) {
