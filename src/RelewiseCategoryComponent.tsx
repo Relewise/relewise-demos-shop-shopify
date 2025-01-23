@@ -1,6 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
+import Category from './Category.tsx'
 
 const element = document.getElementById('root');
 
@@ -12,7 +12,7 @@ if (element) {
     createRoot(element!).render(
       <StrictMode>
         {collectionId && currency && language &&
-          <App collectionId={collectionId} currency={currency} language={language} />
+          <Category collectionId={collectionId} currency={currency} language={language} />
         }
       </StrictMode>,
     );

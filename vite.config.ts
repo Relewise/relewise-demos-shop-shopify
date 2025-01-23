@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     rollupOptions: {
       input: {
-        relewisePlp: 'src/relewisePlp.tsx',
+        RelewiseCategoryComponent: 'src/RelewiseCategoryComponent.tsx',
       },
       output: {
         dir: 'assets',

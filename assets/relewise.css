@@ -1,0 +1,72 @@
+.relewise-category-container {
+    display: flex;
+    width: 100%;
+    margin-top: 36px;
+}
+
+.relewise-facet-container {
+    min-width: 270px;
+    max-width: 270px;
+    margin-right: 6px;
+}
+
+.relewise-pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.relewise-product-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 6px;
+}
+
+.relewise-product-tile {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.relewise-product-image {
+    width: 270px;
+}
+
+.relewise-product-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 8;
+}
+
+.relewise-pagination-buttons-container {
+    display: flex;
+    gap: 6px;
+}
+
+.relewise-checklist-facet-container {
+    border: 1px solid #7d7d7d;
+    padding: 12px;
+}
+
+.relewise-checklist-facet-title {
+    margin-top: 0px;
+}
+
+.relewise-list-item-container {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.relewise-checklist-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.relewise-facet-options-hits {
+    font-size: 12px;
+    color: #888;
+}

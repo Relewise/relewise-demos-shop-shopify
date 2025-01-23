@@ -1,34 +1,21 @@
-<div id="root" 
-     data-shop-currency="{{ shop.currency }}" 
-     data-collection-id="{{ collection.id }}" 
-     data-shop-language="{{ shop.locale }}">
-</div>
+<script src="{{ 'vite-RelewiseCategoryComponent.js' | asset_url }}" defer></script>
+{{ 'relewise.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'vite-relewisePlp.js' | asset_url }}" defer></script>
-
-{% if customer %} Customer {% endif %}
-  {% comment %} <select id="currency-selector">
-    {% for x in shop.enabled_currencies %}
-      <option value="{{ x.iso_code }}" 
-              {% if x.iso_code == shop.currency %}selected{% endif %}>
-        {{ x.iso_code }}
-      </option>
-    {% endfor %}
-  </select> {% endcomment %}
-
-
-
-
+<div
+  id="root"
+  data-shop-currency="{{ shop.currency }}"
+  data-collection-id="{{ collection.id }}"
+  data-shop-language="{{ shop.locale }}"
+></div>
 
 {% schema %}
 {
-  "name": "Relewise",
+  "name": "Relewise Category",
   "settings": [],
   "presets": [
     {
-      "name": "Relewise"
+      "name": "Relewise Category"
     }
   ]
 }
 {% endschema %}
-  
