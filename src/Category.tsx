@@ -11,6 +11,7 @@ import {
 import Pagination from "./Pagination";
 import ProductDataStringValueFacet from "./ProductDataStringValueFacet";
 import PriceRangeSlider from "./PriceRangeSlider";
+import { config } from "../src/config/relewiseConfig";
 
 // Category component: renders the product grid, facets, and pagination
 function Category({
@@ -72,8 +73,8 @@ function Category({
         });
 
       // Initialize the searcher with API credentials and server URL
-      const searcher = new Searcher("213664f9-4d5c-413b-a523-7a9c79c30080", "n_RA9uC6Ar3TQt_", {
-        serverUrl: "https://sandbox-api.relewise.com/",
+      const searcher = new Searcher(config.datasetId, config.apiKey, {
+        serverUrl: config.serverUrl,
       });
 
       try {
