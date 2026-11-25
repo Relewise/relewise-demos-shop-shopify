@@ -48,3 +48,7 @@ export default tseslint.config({
   },
 })
 ```
+
+## Shopify theme license
+
+This demo uses [Shopify Dawn 15.2.0](https://github.com/Shopify/dawn/tree/v15.2.0). The [Dawn license](LICENSE.md) applies to theme code derived from Dawn.
